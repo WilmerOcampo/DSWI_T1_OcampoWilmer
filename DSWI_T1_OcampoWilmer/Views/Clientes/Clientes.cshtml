@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DSWI_T1_OcampoWilmer.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<h1 class="mb-4 text-center">Clientes</h1>
+
+<div class="d-flex justify-content-start mb-4">
+    <form asp-action="Clientes" asp-controller="Clientes" class="form-inline">
+        <div class="input-group">
+            @Html.TextBox("n", "", new { @class = "form-control", placeholder = "Nombre del Cliente" })
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idPais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fono)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idPais)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fono)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary btn-sm mr-1" }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info btn-sm mr-1" }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Paginación -->
+<div class="mt-4 d-flex justify-content-center">
+    @for (int i = 0; i < (int)ViewBag.pags; i++)
+    {
+        <a asp-action="Clientes" asp-route-n="@ViewBag.n" asp-route-p="@i" class=@(i == (int)ViewBag.p ? "btn btn-success mx-1" : "btn btn-primary mx-1")>@(i + 1)</a>
+    }
+</div>

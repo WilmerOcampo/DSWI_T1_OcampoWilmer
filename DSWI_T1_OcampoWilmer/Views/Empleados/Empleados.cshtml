@@ -1,0 +1,94 @@
+﻿@model IEnumerable<DSWI_T1_OcampoWilmer.Models.Empleado>
+
+@{
+    ViewData["Title"] = "Empleados";
+}
+
+<h1 class="mb-4 text-center">Empleados</h1>
+
+<div class="d-flex justify-content-start mb-4">
+    <form asp-action="Empleados" asp-controller="Empleados" class="form-inline">
+        <div class="input-group">
+            @Html.TextBox("n", "", new { @class = "form-control", placeholder = "Nombre del Empleado" })
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEmpleado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FecNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDistrito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FecContrata)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEmpleado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FecNacimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDistrito)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FecContrata)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary btn-sm mr-1" }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info btn-sm mr-1" }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Paginación -->
+<div class="mt-4 d-flex justify-content-center">
+    @for (int i = 0; i < (int)ViewBag.pags; i++)
+    {
+        <a asp-action="Empleados" asp-route-n="@ViewBag.n" asp-route-p="@i" class=@(i == (int)ViewBag.p ? "btn btn-success mx-1" : "btn btn-primary mx-1")>@(i + 1)</a>
+    }
+</div>
